@@ -9,7 +9,7 @@ using RoraAPI.Model;
 
 namespace RoraAPI.Controller
 {
-     [ServiceFilter(typeof(UserActivities))]
+    // [ServiceFilter(typeof(UserActivities))]
     [ApiController]
     [Route("[controller]/[Action]")] 
     [Authorize]

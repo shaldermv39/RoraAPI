@@ -11,9 +11,9 @@ namespace RoraAPI.Model
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var resultContext = await next();
-            var userid = int.Parse(resultContext.HttpContext.User.FindFirst
-                (ClaimTypes.NameIdentifier).Value);
+            //var resultContext = await next();
+            //var userid = int.Parse(resultContext.HttpContext.User.FindFirst
+            //    (ClaimTypes.NameIdentifier).Value);
          //   var repo= resultContext.HttpContext.RequestServices.GetService
         }
     }
