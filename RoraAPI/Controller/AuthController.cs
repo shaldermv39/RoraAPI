@@ -21,9 +21,11 @@ namespace RoraAPI.Controller
     public class AuthController : ControllerBase
     {
         IConfiguration _config;
-        public AuthController(IConfiguration config)
+        APIDBContext _dbContext;
+        public AuthController(APIDBContext dbcontext, IConfiguration config)
         {
             _config = config;
+            _dbContext = dbcontext;
         }
 
         [HttpGet]

@@ -28,7 +28,8 @@ namespace RoraAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<APIDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:CustSrvConnection")));
+            string s = Configuration.GetConnectionString("CustSrvConnection");
+            services.AddDbContext<APIDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("CustSrvConnection")));
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IAuthInterface, AuthRepository>();
