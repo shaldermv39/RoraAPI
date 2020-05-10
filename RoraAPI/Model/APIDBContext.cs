@@ -8,8 +8,8 @@ namespace RoraAPI.Model
 {
     public class APIDBContext  :DbContext 
     {
-        APIDBContext(DbContextOptions<APIDBContext> options):base(options)
+      public  APIDBContext(DbContextOptions<APIDBContext> options):base(options)
         { }
-        DbSet<User>Users { get; set; }
+  public      DbSet<User>Users { get; set; }
     }
 }

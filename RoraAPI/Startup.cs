@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using RoraAPI.BL;
 using RoraAPI.Model;
 
 namespace RoraAPI
@@ -26,9 +28,11 @@ namespace RoraAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<APIDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:CustSrvConnection")));
             services.AddControllers();
             services.AddCors();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddScoped<IAuthInterface, AuthRepository>();
+                        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -40,7 +44,9 @@ namespace RoraAPI
                         ValidateAudience = false
                     };
                 }) ;
+
             services.AddScoped<UserActivities>();
+            
 
         }
 
@@ -51,6 +57,7 @@ namespace RoraAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
